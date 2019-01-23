@@ -1,0 +1,16 @@
+---
+################################################################
+# Installing basic required packages to run ansible and hadoop #
+################################################################
+- name: Install prerequisite packages
+  package:
+    name: "{{item}}"
+    state: latest
+  with_items:
+    - epel-release
+    - unzip
+    - wget
+    - curl
+  when: ansible_os_family == 'RedHat'   
+  
+
