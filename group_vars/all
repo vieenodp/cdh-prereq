@@ -4,22 +4,22 @@
 ####################################################################
 
 ### Common variables ###
-ANSIBLE_USER: synthesys # User who has a sudo access on all hosts
+ANSIBLE_USER: ansibledev # User who has a sudo access on all hosts
 DOMAIN: local # Acceptable values: local, internet
 CLUSTER: Cluster1 # Name of Hadoop cluster
 FLAVOUR: cdh # Acceptable values: cdh, hdp, bi
 HA_NAMENODE: false
 HA_RESOURCE_MANAGER: false
 NAMESERVICE: nameservice1
-
+PKEY: "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEA4a6Rzv02jV+EiRgAN4BFZM2lTTWAxTwYv4WbuVjJazQLrEEPSp6gHrj3rZ8T2pN3u71opd8YgYVVmdrzMmCLYj8NuoDFEP36xAq/rEO5nUoKLYI07DoqAApXAxyrTq/wAjOutguOWqiB1c8bPN072RAPUcd6OEnPeD6CyvYnLvXskfqhi0ojJQXbX5rV7NrOigmMe7OGULCv9eo64N5mFtJn4IxCvYJS3cKJzn+myWd5GcNOD7ZMn2iWi8id+8x3uXxCSAI/n0VupVTCo2yY7QDXYk0/wN+43v3I4UNqRqiZtNofiBTZS2dIo1TlvEbXflYaYqc3ZGjxss38pSuEmwIDAQABAoIBAHCWfYltC6UVzPHz9k+5/2Sdr2TIV1iOda4+goTCBaIk0dn6jx1j62/ISU/lt6rovOf9Q1LU7M3Y7e6Wq5MrVP4LhNbRXP7wJgVdc2gGVXhhspgniC19iuyAPA6CY/gaj7sZe4S4WSljPXqkGuuPV0cf2vSqdo/USturG+cTTFMBTty/DKz9WAi9cVs9GAt9gb8QN9qQ9r1TR8+NbpxJ+7xA4h+pz7bXE/AtKLjW1IujBkv4kFESpjNcGGqwsph8ElzRNHEYClJC059TMWOtehyVMcvjzv5DBj+NsYC2P0ENK+DPsViNb9+sp56X/T5r/lG+DnQ0ZHGONVNGvP73D4ECgYEA/8UjTI6N4RlOkf5uGkBEABzqBx08OdVjLL30EKC8J1F3wJo0WgLnbMM31tJdZLj0H0MOUm+4yre02wJVTP38GpYuWE2Ck0hQoAyh7O/0usaOo7+V3TI9Ghy2hqz1rMJE+Ru5aJ6QDGjENOVgDPVRPGlMDDf8KWgfgaJwoReCJ0ECgYEA4eKB3WZ0gxSja9t5lO9Tw7fgOW+XbjHzo7DQmoC14ux/vawGB0a5OdfKb4mr38d2ldDr9me9ftnxSxfAPkrI7TOwH3hohE2FISN4WOqPjhSpcmJVdPD6q/SmGi6rBsmUPHYNka3LLCrBJk4LzjIaPH2e8rB5rIbPIo0wa2FH8NsCgYEAp/+uMvAD41IDGMQdP+Lsh4J2edvLHlW6Qb43XOCnFdBeL0Vak7EKn5cOy2z76VfPCeW6t40ovQazpZM/wkWl3TS+FkQ7O1CpnKcPiRkID9KyCH6kClmgZtFrVsSuzh4Avftm6oAUMAJ0tiXf1EMia+LiD7iKSgxZfYXcIwPU+sECgYAHL7Kb/Zd1WCG+27Ophleu4Vmz2hYCPnqW2Zg5YiDnQEjsGt3yO1DHQ1NAayvZqbnfGE95fmFr+LkRf4bxNGXiDgPrbGQ+2UyD+mHoykWY6pVdez1mxAflkpn6OUPdqmoZ5lOWL+ZH2HBerJr5i2SESibVZ8HnOD68xaslr2mfgwKBgHUCD/ypmLyOin1+DrfXNP3x0BZuo/SteCaDIiQ+QhCxZ2eROVEWsBz+t5Vjp+wRI+5vSqscRON6KJNqk7OVcv9olEFlhDuAyw0zvCtxu+TaKFqLBiSBgsidetb4H+nLCh8CVG+IWNLQ/+UvtbRH9kclQ3xpOf71jaLU/9yuYMAm\n-----END RSA PRIVATE KEY-----"
 
 ### Variables need to be changed, if domain is local (intranet) ###
-NTP_SERVER: 10.0.0.4 # Internal time server IP for time sync
-OS_REPO: http://mirror.centos.org/centos/7/CentOS-Base.repo #URL of OS repo
+#NTP_SERVER: 10.0.0.4 # Internal time server IP for time sync
+#OS_REPO: http://mirror.centos.org/centos/7/CentOS-Base.repo #URL of OS repo
 
 
 ### Variables for Cloudera ###
-CDH_VER: 5.14.0 # Cloudera version which you want to install 
+CDH_VER: 5.14.4 #Cloudera version which you want to install 
 CM_BASE_URL: http://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5.14.4/ # Base URL of CM repo 
 CDH_PARCELS_REPO: https://archive.cloudera.com/cdh5/parcels/5.14.4/ # URL of parcels (CDH ) seperated by comma
 

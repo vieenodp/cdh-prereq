@@ -43,7 +43,7 @@
     HEADER_Content-Type: "application/json"
     body: {"hostNames": "[{{all_hadoop_hosts.stdout}}]",
             "userName" : "{{ANSIBLE_USER}}",
-            "password" : "{{ansible_password}}",
+            "privateKey" : 
             "cmRepoUrl" : "{{CM_BASE_URL}}"}
     body_format: json
     creates: /opt/cdh/hosts_install

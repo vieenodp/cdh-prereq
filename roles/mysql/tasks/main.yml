@@ -1,0 +1,46 @@
+---
+- name: install mysql rpm repo
+  yum:
+    name: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+    state: present
+
+- name: install mysql rpm
+  yum:
+    name: mysql-server
+    state: present
+
+- name: start mysql service
+  service:
+    name: mysqld
+    state: started
+
+- name: Sets the root password 
+  mysql_user:
+    name: ''
+    host: localhost
+    state: absent
+
+- name: Secures the MySQL root user for 127.0.0.1
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    host: "127.0.0.1"
+
+- name: Secures the MySQL root user for localhost
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    host: localhost
+
+- name: Secures the MySQL root user for IPv4
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    host: "{{ ansible_default_ipv4.address }}"
+
+- name: Removes the MySQL test database
+  mysql_db:
+    name: test
+    state: absent
+
+

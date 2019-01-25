@@ -1,79 +1,42 @@
 
-
-### Groups for Cloudera ###
+[test]
+wipro-d2.devops.digitalreasoning.com
 
 [cloudera_master]
-#10.77.46.90
+wipro-s0.devops.digitalreasoning.com
 
 [hadoop_hosts]
-#10.77.46.90
-#10.77.36.149
-#10.77.36.130
-#10.77.36.99
-
-[hive_nodes]
-#10.77.46.90
-
-[spark_on_yarn]
-#10.77.36.99
+wipro-m0.devops.digitalreasoning.com
+wipro-m1.devops.digitalreasoning.com
+wipro-m2.devops.digitalreasoning.com
+wipro-d0.devops.digitalreasoning.com
+wipro-d1.devops.digitalreasoning.com
+wipro-d2.devops.digitalreasoning.com
+wipro-s0.devops.digitalreasoning.com
 
 [oozie]
-#10.77.36.130
-
-[hbase]
-#10.77.36.149
+wipro-m2.devops.digitalreasoning.com
 
 [datanodes]
-#10.77.46.90
-#10.77.36.130
-
-[solr]
-#10.77.46.90
-
-[sqoop]
-#10.77.46.90
-
-[flume]
-#10.77.36.130
+wipro-d0.devops.digitalreasoning.com
+wipro-d1.devops.digitalreasoning.com
+wipro-d2.devops.digitalreasoning.com
+wipro-s0.devops.digitalreasoning.com
 
 [namenode]
-#10.77.46.90
+wipro-m0.devops.digitalreasoning.com
+
 
 [resourcemanager]
-#10.77.46.90
+wipro-m0.devops.digitalreasoning.com
 
 [secondarynn]
-#10.77.36.130
+wipro-m1.devops.digitalreasoning.com
 
 [zookeeper]
-#10.77.46.90
-
-[hue]
-#10.77.46.90
-
-[impala]
-#10.77.46.90
-
-[kms]
-#10.77.46.90
-
-[ks_indexer]
-#10.77.46.90
-
-[sentry]
-#10.77.36.99
-
-[kafka]
-#10.77.36.99
+wipro-m0.devops.digitalreasoning.com
+wipro-m1.devops.digitalreasoning.com
+wipro-s0.devops.digitalreasoning.com
 
 [journalnode]
-#10.77.46.90
-#10.77.36.99
-#10.77.36.130
-
-[standbynamenode]
-#10.77.36.99
-
-[standbyresourcemanager]
-#10.77.36.149
 
