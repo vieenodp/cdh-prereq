@@ -2,6 +2,9 @@
 [test]
 wipro-d2.devops.digitalreasoning.com
 
+[mysql]
+wipro-m2.devops.digitalreasoning.com
+
 [cloudera_master]
 wipro-s0.devops.digitalreasoning.com
 

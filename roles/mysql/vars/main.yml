@@ -1,2 +1,3 @@
 ---
 # vars file for mysql
+mysql_root_password: "synthesys"
