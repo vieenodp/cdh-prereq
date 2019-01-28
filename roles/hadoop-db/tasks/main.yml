@@ -1,0 +1,27 @@
+---
+- name: create hadoop databases
+  mysql_db:
+    name: "{{ item }}"
+    state: present
+    login_user: "{{ mysqluser }}"
+    login_password: "{{ mysqlrootpasswd }}"
+  with_items:
+    - amon
+    - rman
+    - scm
+    - oozie
+
+- name: create user and grant access
+  mysql_user:
+    login_user: "{{ mysqluser }}"
+    login_password: "{{ mysqlrootpasswd }}"
+    name: "{{ item }}"
+    password: "{{ item }}" 
+    host: "%"
+    state: present
+    priv: "{{ item }}.*:ALL"
+  with_items:
+    - amon
+    - rman
+    - scm
+    - oozie

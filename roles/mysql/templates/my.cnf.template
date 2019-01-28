@@ -1,0 +1,51 @@
+[mysqld]
+datadir= {{ datadir }}
+socket=/var/lib/mysql/mysql.sock
+transaction-isolation = READ-COMMITTED
+# Disabling symbolic-links is recommended to prevent assorted security risks;
+# to do so, uncomment this line:
+symbolic-links = 0
+
+key_buffer_size = {{ key_buffer_size }}
+max_allowed_packet = {{ max_allowed_packet }}
+thread_stack = {{ thread_stack }}
+thread_cache_size = {{ thread_cache_size }}
+query_cache_limit = {{ query_cache_limit }}
+query_cache_size = {{ query_cache_size }}
+query_cache_type = {{ query_cache_type }}
+
+max_connections = {{ max_connections }}
+#expire_logs_days = 10
+#max_binlog_size = 100M
+
+#log_bin should be on a disk with enough free space.
+#Replace '/var/lib/mysql/mysql_binary_log' with an appropriate path for your
+#system and chown the specified folder to the mysql user.
+log_bin=/var/lib/mysql/mysql_binary_log
+
+#In later versions of MySQL, if you enable the binary log and do not set
+#a server_id, MySQL will not start. The server_id must be unique within
+#the replicating group.
+server_id= {{ server_id }}
+
+binlog_format = mixed
+
+read_buffer_size = {{ read_buffer_size }}
+read_rnd_buffer_size = {{ read_rnd_buffer_size }}
+sort_buffer_size = {{ sort_buffer_size }}
+join_buffer_size = {{ join_buffer_size }}
+
+# InnoDB settings
+innodb_file_per_table = {{ innodb_file_per_table }}
+innodb_flush_log_at_trx_commit  = {{ innodb_flush_log_at_trx_commit }}
+innodb_log_buffer_size = {{ innodb_log_buffer_size }}
+innodb_buffer_pool_size = {{ innodb_buffer_pool_size }}
+innodb_thread_concurrency = {{ innodb_thread_concurrency }}
+innodb_flush_method = {{ innodb_flush_method }}
+innodb_log_file_size = {{ innodb_log_file_size }}
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+sql_mode= {{ sql_mode }}

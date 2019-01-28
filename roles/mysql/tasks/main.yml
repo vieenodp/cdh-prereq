@@ -45,4 +45,16 @@
     name: test
     state: absent
 
+- name: remove old innodb log files
+  file:
+    path: '/var/lib/mysql/{{ item }}'
+    state: absent
+  with_items:
+    - ib_logfile0
+    - ib_logfile1
 
+- name: update my.cnf with appropriate configuration
+  template: 
+    src: roles/mysql/templates/my.cnf.template
+    dest: /etc/my.cnf
+  notify: Restart MySQL 
