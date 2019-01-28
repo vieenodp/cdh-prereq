@@ -1,2 +1,4 @@
 ---
 # vars file for synthesys-db
+mysql_user: "root"
+mysql_root_password: "synthesys"

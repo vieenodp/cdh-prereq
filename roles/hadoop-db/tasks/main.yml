@@ -3,8 +3,8 @@
   mysql_db:
     name: "{{ item }}"
     state: present
-    login_user: "{{ mysqluser }}"
-    login_password: "{{ mysqlrootpasswd }}"
+    login_user: "{{ mysql_user }}"
+    login_password: "{{ mysql_root_password }}"
   with_items:
     - amon
     - rman
@@ -14,7 +14,7 @@
 - name: create user and grant access
   mysql_user:
     login_user: "{{ mysqluser }}"
-    login_password: "{{ mysqlrootpasswd }}"
+    login_password: "{{ mysql_root_password }}"
     name: "{{ item }}"
     password: "{{ item }}" 
     host: "%"

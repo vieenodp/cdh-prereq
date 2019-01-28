@@ -1,2 +1,35 @@
 ---
-# tasks file for synthesys-db
+- name: create hadoop databases
+  mysql_db:
+    name: "{{ item }}"
+    state: present
+    login_user: "{{ mysql_user }}"
+    login_password: "{{ mysql_root_password }}"
+  with_items:
+    - synthesys_app
+    - synthesys_audit
+
+- name: create user and grant access
+  mysql_user:
+    login_user: "{{ mysql_user }}"
+    login_password: "{{ mysql_root_password }}"
+    name: "{{ item }}"
+    password: synthesys
+    host: "%"
+    state: present
+    priv: "{{ item }}.*:ALL"
+  with_items:
+    - synthesys_app
+    - synthesys_audit
+
+- name: copy sql file on sql server
+  copy:
+    src: roles/synthesys-db/files/synthesysaudit.sql
+    dest: /tmp/
+
+- name: execute sql file to create synthesys audit tables
+  shell: mysql -u synthesys_audit --password=synthesys -D synthesys_audit < /tmp/synthesysaudit.sql
+  register: res
+  failed_when: "res.rc != 0"
+
+    

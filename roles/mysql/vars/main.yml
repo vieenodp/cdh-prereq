@@ -1,5 +1,6 @@
 ---
 # vars file for mysql
+mysql_user: "root"
 mysql_root_password: "synthesys"
 datadir: /var/lib/mysql
 transaction-isolation: READ-COMMITTED
