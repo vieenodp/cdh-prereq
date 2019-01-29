@@ -1,1 +1,0 @@
-{% for host in groups['journalnode'] %}{"jnHostId":"{{hostvars[host].ansible_fqdn}}","jnEditsDir":"/dfs/jn"}{% if not loop.last %},{% endif %}{% endfor %}
