@@ -2,6 +2,15 @@
 ################################################################
 # Installing basic required packages to run ansible and hadoop #
 ################################################################
+- name: disable selinux
+  selinux:
+    state: disabled
+
+#- name: stop firewall at runlevel
+#  service:
+#    name: firewalld
+#    enabled: no
+
 - name: Install prerequisite packages
   package:
     name: "{{item}}"
@@ -24,6 +33,7 @@
   stat:
     path: /tmp/jdk-8u201-linux-x64.rpm
   register: jdk_rpm
+  failed_when: not jdk_rpm.stat.exists
 
 - name: install oracle jdk
   yum: name=/tmp/jdk-8u201-linux-x64.rpm
@@ -49,6 +59,7 @@
   stat:
     path: /tmp/jce_policy-8.zip
   register: jce_zip
+  failed_when: not jce_zip.stat.exists
 
 - name: Delete existing jce dir if exists
   file:
@@ -57,9 +68,13 @@
 
 - name: unzip jce zip
   shell: unzip /tmp/jce_policy-8.zip -d /tmp/
+  register: cmdunzip
+  failed_when: "cmdunzip.rc != 0"
 
 - name: copy jce jars
   shell: cp -f /tmp/UnlimitedJCEPolicyJDK8/*.jar /usr/java/jdk1.8.0_201-amd64/jre/lib/security/policy/unlimited
+  #register: cpcmd
+  #failed_when: "cpcmd != 0"
 
 - name: download mysql jdbcconnector
   unarchive:
