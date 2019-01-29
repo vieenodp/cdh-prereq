@@ -1,0 +1,44 @@
+---
+- name: install httpd
+  yum:
+    name: httpd
+    state: present
+
+- name: start httpds 
+  service:
+    name: httpd
+    state: started
+
+- name: create dir for parcel repo
+  file:
+    path: "{{ parceldir }}/{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - cdh5
+    - cm5
+
+- name: create link 
+  file: 
+    src: "{{ parceldir }}/cdh5"
+    path: /var/www/html/cdh5
+    state: link
+
+- name: download CDH 5.14.4 parcel 
+  get_url:
+    url: "{{ parcelurl }}"
+    dest: "{{ parceldir }}/cdh5"
+    mode: 0755
+
+- name: download cloudera manager RPM
+  get_url:
+    url: "{{ cmdurl }}"
+    dest: "{{ parceldir }}/cm5"
+    mode: 0755
+
+- name: download cloudera manager RPM
+  get_url:
+    url: "{{ cmsurl }}"
+    dest: "{{ parceldir }}/cm5"
+    mode: 0755
+ 
