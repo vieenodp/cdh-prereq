@@ -16,19 +16,34 @@
   roles:
   - pre_requisites
 
-
-- name: Installation of Cloudera
+- name: download and configure cdh parcel repo
   hosts: cloudera_master
   user: "{{ANSIBLE_USER}}"
   become: yes
   become_method: sudo
   roles:
-  - { role: cloudera, when: FLAVOUR == 'cdh'}
+  - parcel-repo
 
+- name: Mysql
+  hosts: mysql
+  user: "{{ANSIBLE_USER}}"
+  become: yes
+  become_method: sudo
+  roles:
+  - mysql
 
-- name: Msg for Cloudera
-  hosts: cloudera_master
-  tasks:
-   - debug: msg="Watch Cloudera installation progress at '{{groups['cloudera_master'][0]}}:7180'. Login with Username - admin and Password - admin"
-     when: FLAVOUR == 'cdh'
+- name: hadoop DBs
+  hosts: mysql
+  user: "{{ANSIBLE_USER}}"
+  become: yes
+  become_method: sudo
+  roles:
+  - hadoop-db
 
+- name: synthesys DBs
+  hosts: mysql
+  user: "{{ANSIBLE_USER}}"
+  become: yes
+  become_method: sudo
+  roles:
+  - synthesys-db

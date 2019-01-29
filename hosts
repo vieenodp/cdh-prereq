@@ -1,7 +1,4 @@
 
-[test]
-wipro-d2.devops.digitalreasoning.com
-
 [mysql]
 wipro-m2.devops.digitalreasoning.com
 
@@ -12,7 +9,6 @@ wipro-s0.devops.digitalreasoning.com
 wipro-m0.devops.digitalreasoning.com
 wipro-m1.devops.digitalreasoning.com
 wipro-m2.devops.digitalreasoning.com
-wipro-d0.devops.digitalreasoning.com
 wipro-d1.devops.digitalreasoning.com
 wipro-d2.devops.digitalreasoning.com
 wipro-s0.devops.digitalreasoning.com
@@ -21,7 +17,6 @@ wipro-s0.devops.digitalreasoning.com
 wipro-m2.devops.digitalreasoning.com
 
 [datanodes]
-wipro-d0.devops.digitalreasoning.com
 wipro-d1.devops.digitalreasoning.com
 wipro-d2.devops.digitalreasoning.com
 wipro-s0.devops.digitalreasoning.com
@@ -41,5 +36,4 @@ wipro-m0.devops.digitalreasoning.com
 wipro-m1.devops.digitalreasoning.com
 wipro-s0.devops.digitalreasoning.com
 
-[journalnode]
 

@@ -1,31 +1,96 @@
 ---
-##########################################################################################
-#                                                                                        #
-# This will configure all the host operating system according to hadoop preprequisite.   #
-# The high level flow of playbook will be as follow:                                     #
-# a. Configure OS repository                                                             #      
-# b. DNS name                                                                            #
-# c. Selinux                                                                             #
-# d. Ntp                                                                                 #       
-##########################################################################################
+################################################################
+# Installing basic required packages to run ansible and hadoop #
+################################################################
+- name: disable selinux
+  selinux:
+    state: disabled
 
-- name: Create dir for files
+#- name: stop firewall at runlevel
+#  service:
+#    name: firewalld
+#    enabled: no
+
+- name: Install prerequisite packages
+  package:
+    name: "{{item}}"
+    state: latest
+  with_items:
+    - epel-release
+    - unzip
+    - wget
+    - curl
+  when: ansible_os_family == 'RedHat'   
+  
+- name: download oracle jdk rpm
+  get_url:
+    url: https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.rpm
+    dest: /tmp/
+    validate_certs: no
+    headers : "Cookie: oraclelicense=accept-securebackup-cookie"
+
+- name: Ansible check jdk rpm  exists
+  stat:
+    path: /tmp/jdk-8u201-linux-x64.rpm
+  register: jdk_rpm
+  failed_when: not jdk_rpm.stat.exists
+
+- name: install oracle jdk
+  yum: name=/tmp/jdk-8u201-linux-x64.rpm
+  when: jdk_rpm.stat.exists
+
+- name: set java path
+  blockinfile:
+    path: /etc/profile
+    insertafter: EOF
+    block: |
+      export JAVA_HOME=/usr/java/jdk1.8.0_201-amd64
+      export JRE_HOME=/usr/java/jdk1.8.0_201-amd64/jre
+      export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+
+- name: download oracle jce zip
+  get_url:
+    url: http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip
+    dest: /tmp/
+    validate_certs: no
+    headers : "Cookie: oraclelicense=accept-securebackup-cookie"
+
+- name: Check JCE zip exists
+  stat:
+    path: /tmp/jce_policy-8.zip
+  register: jce_zip
+  failed_when: not jce_zip.stat.exists
+
+- name: Delete existing jce dir if exists
   file:
-    path: "/opt/{{FLAVOUR}}"
+    state: absent
+    path: /tmp/UnlimitedJCEPolicyJDK8/
+
+- name: unzip jce zip
+  shell: unzip /tmp/jce_policy-8.zip -d /tmp/
+  register: cmdunzip
+  failed_when: "cmdunzip.rc != 0"
+
+- name: copy jce jars
+  shell: cp -f /tmp/UnlimitedJCEPolicyJDK8/*.jar /usr/java/jdk1.8.0_201-amd64/jre/lib/security/policy/unlimited
+  #register: cpcmd
+  #failed_when: "cpcmd != 0"
+
+- name: download mysql jdbcconnector
+  unarchive:
+    src: https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.47.tar.gz
+    dest: /tmp/
+    validate_certs: no
+    remote_src: yes
+
+- name: create /usr/share/java dir
+  file:
+    path: /usr/share/java
     state: directory
+    mode: 0755 
 
-- name: Get file_exists into register
-  stat: path="/opt/{{FLAVOUR}}/pre_req"
-  register: file_exists
-
-#- include: configure-os.yml
-#  when: "DOMAIN == 'local' and not file_exists.stat.exists"
-
-#- include: configure-pre.yml
-#  when: not file_exists.stat.exists
- 
-- include: install-pre.yml
-#  when: not file_exists.stat.exists
- 
-- name: Create pre_req file
-  file: path="/opt/{{FLAVOUR}}/pre_req" state=touch
+- name: copy mysql jdbc files
+  copy:
+    src: /tmp/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47-bin.jar
+    dest: /usr/share/java/
+    remote_src: yes
