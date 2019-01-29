@@ -28,8 +28,11 @@
     dest: /tmp/
 
 - name: execute sql file to create synthesys audit tables
-  shell: mysql -u synthesys_audit --password=synthesys -D synthesys_audit < /tmp/synthesysaudit.sql
-  register: res
-  failed_when: "res.rc != 0"
-
-    
+  mysql_db:
+    login_user: synthesys_audit
+    login_password: synthesys
+    state: import
+    name: synthesys_audit
+    target: /tmp/synthesysaudit.sql
+  run_once: true
+  ignore_errors: yes

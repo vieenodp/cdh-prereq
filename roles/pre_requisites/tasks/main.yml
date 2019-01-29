@@ -6,10 +6,11 @@
   selinux:
     state: disabled
 
-#- name: stop firewall at runlevel
-#  service:
-#    name: firewalld
-#    enabled: no
+- name: stop firewall at runlevel
+  service:
+    name: firewalld
+    enabled: no
+  ignore_errors: yes
 
 - name: Install prerequisite packages
   package:
