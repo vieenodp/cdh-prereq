@@ -25,7 +25,7 @@
   
 - name: download oracle jdk rpm
   get_url:
-    url: https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.rpm
+    url: "{{ jdkurl }}"
     dest: /tmp/
     validate_certs: no
     headers : "Cookie: oraclelicense=accept-securebackup-cookie"
@@ -51,7 +51,7 @@
 
 - name: download oracle jce zip
   get_url:
-    url: http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip
+    url: "{{ jceurl }}"
     dest: /tmp/
     validate_certs: no
     headers : "Cookie: oraclelicense=accept-securebackup-cookie"
@@ -79,7 +79,7 @@
 
 - name: download mysql jdbcconnector
   unarchive:
-    src: https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.47.tar.gz
+    src: "{{ jdbcurl }}"
     dest: /tmp/
     validate_certs: no
     remote_src: yes
