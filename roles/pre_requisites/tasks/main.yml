@@ -93,5 +93,5 @@
 - name: copy mysql jdbc files
   copy:
     src: /tmp/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47-bin.jar
-    dest: /usr/share/java/
+    dest: /usr/share/java/mysql-connector-java.jar
     remote_src: yes
